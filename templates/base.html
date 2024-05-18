@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PyECMFlow{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'css/ui/tabler.css' %}" rel="stylesheet"/>
+
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+
+</head>
+<body  class=" layout-fluid">
+    <div class="page">
+        {% include 'navigation.html' %}
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="container-xl">
+                    {% block content %}{% endblock %}
+                </div>
+             </div>
+        </div>
+    </div>
+</body>
+</html>

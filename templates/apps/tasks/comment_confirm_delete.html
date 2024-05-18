@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Подтвердить удаление</h3>
+              </div>
+              <div class="card-body">
+                <p>Вы уверены, что хотите удалить?</p>
+                <form method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Удалить</button>
+                  <a href="{% url 'tasks:task_list' %}" class="btn btn-secondary">Отмена</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

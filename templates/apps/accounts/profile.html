@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Информация</h2>
+                </div>
+                <div class="card-body">
+                    <p><strong>Пользователь:</strong> {{ user.username }}</p>
+                    <p><strong>Имя:</strong> {{ user.first_name }}</p>
+                    <p><strong>Фамилия:</strong> {{ user.last_name }}</p>
+                    <p><strong>Электронный адрес:</strong> {{ user_profile.user.email }}</p>
+                    <p><strong>О себе:</strong> {{ user.profile.bio }}</p>
+                    <p><strong>Телефон:</strong> {{ user.profile.phone_number }}</p>
+                </div>
+                <a href="{% url 'accounts:edit_profile' %}" class="btn btn-primary mt-2">Редактировать профиль</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Данные </h2>
+                </div>
+                <div class="card-body">
+                    <p><strong>Последнее посещение:</strong> {{ user.last_login }}</p>
+                    <p><strong>Регистрация:</strong> {{ user.date_joined }}</p>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2>Фото профиля</h2>
+                </div>
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    {% if user.profile.profile_picture %}
+                    <img src="{{ user.profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail mb-3 profile-picture-profile">
+                    <a href="{% url 'accounts:change_profile_picture' %}" class="btn btn-primary mt-2">Изменить фото</a>
+                    {% else %}
+                    <form method="post" action="{% url 'accounts:upload_profile_picture' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="file" name="profile_picture" id="profile_picture" class="form-control-file">
+                            <button type="submit" class="btn btn-primary mt-2" id="upload_button" disabled>Обновить</button>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

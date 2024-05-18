@@ -1,0 +1,94 @@
+
+/* karla-200 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 200;
+  src: url('/static/fonts/karla-v31-latin-200.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+
+.profile-picture-profile {
+    width: 240px;  /* Adjust as needed */
+    height: 240px;  /* Adjust as needed */
+    border-radius: 50%;  /* This makes the image round */
+    object-fit: cover;  /* This will ensure the image covers the whole area */
+}
+
+body {
+        font-family: "Karla", sans-serif;
+        background-color: #fff;
+        min-height: 100vh; }
+
+h1 {font-family: "Karla", sans-serif;
+    font-weight: bolder;}
+
+      .login-section-wrapper {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+                flex-direction: column;
+        padding: 5px 100px;
+        background-color: #fff; }
+        @media (max-width: 991px) {
+          .login-section-wrapper {
+            padding-left: 50px;
+            padding-right: 50px; } }
+        @media (max-width: 575px) {
+          .login-section-wrapper {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            min-height: 100vh; } }
+
+      .login-wrapper {
+        width: 400px;
+        max-width: 100%;
+        padding-top: 24px;
+        padding-bottom: 24px; }
+        @media (max-width: 575px) {
+          .login-wrapper {
+            width: 100%; } }
+        .login-wrapper .form-control {
+          border: none;
+          border-bottom: 1px solid #e7e7e7;
+          border-radius: 0;
+          padding: 9px 5px;
+          min-height: 40px;
+          font-size: 18px;
+          font-weight: normal; }
+          .login-wrapper .form-control::placeholder {
+            color: #b0adad; }
+        .login-wrapper .login-btn {
+          padding: 8px 20px;
+          background-color: #5cadbf;
+          border-radius: 0;
+          font-size: 22px;
+          font-weight: bold;
+          color: #ffffff;
+          margin-bottom: 14px; }
+          .login-wrapper .login-btn:hover {
+            border: 1px solid #5cadbf;
+            background-color: #fff;
+            color: #5cadbf; }
+        .login-wrapper a.register {
+          color: #427082;
+          font-size: 14px;
+          text-decoration: underline;
+          display: inline-block;
+          margin-bottom: 54px; }
+          @media (max-width: 575px) {
+            .login-wrapper a.register {
+              margin-bottom: 16px; } }
+        .login-wrapper-footer-text {
+          font-size: 16px;
+          color: #000;
+          margin-bottom: 0; }
+
+      .login-title {
+        font-size: 34px;
+        color: #000;
+        font-weight: bold;
+        margin-bottom: 25px; }
+

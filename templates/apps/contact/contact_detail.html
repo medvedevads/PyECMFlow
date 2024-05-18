@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">{{ contact.first_name }} {{ contact.last_name }} - {{ contact.title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Деловой партнер:</strong> {% if contact.business_partner and contact.business_partner.pk %}
+                <a href="{% url 'business_partner:businesspartner_detail' contact.business_partner.pk %}">{{ contact.business_partner.name }} - {{ contact.business_partner.get_full_address }}</a>
+                {% else %}
+                Отсутсвует
+                {% endif %}
+            <p><strong>Электронная почта:</strong> {{ contact.email}}</p>
+            <p><strong>Телефон:</strong> {{ contact.phone }}</p>
+            <p><strong>Должность:</strong> {{ contact.title }} ({{ contact.department }})</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Заметки:</strong> {{ contact.notes }}</p>
+            <p><strong>Последнее взаимодействие:</strong> {% if contact.last_contacted %}{{ contact.last_contacted }}{% else %}Never{% endif %}</p>
+            <p><strong>Предпочитаемый способ связи:</strong> {{ contact.get_preferred_communication_display }}</p>
+            <p><strong>Дата создания:</strong> {{ contact.created_at }}</p>
+            <p><strong>Дата обновления:</strong> {{ contact.updated_at }}</p>
+            <p><strong>Пользователь:</strong> {{ contact.user.username }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-end">
+            <a href="{% url 'contact:contact_update' contact.pk %}" class="btn btn-primary">Редактировать</a>
+            <a href="{% url 'contact:contact_delete' contact.pk %}" class="btn btn-danger">Удалить</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header d-print-none" style="margin-top:-6px;">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">Доска</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xl" style="margin-top:6px;">
+    <div class="row row-deck row-cards">
+        <div class="col-sm-6 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Деловые партнеры</h5>
+                    <p class="card-text">Просматривайте и управляйте своими бизнес-партнерами</p><div class="text-center">
+                    <a href="{% url 'business_partner:businesspartner_list' %}" class="btn btn-primary d-flex align-items-end" >Перейти к Деловым партнерам</a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Договоры</h5>
+                    <p class="card-text">Просматривайте и управляйте контрактами</p>
+                    <div class="text-center">
+                        <a href="{% url 'contracts:contracts_list' %}" class="btn btn-primary d-flex align-items-end">Перейти к Договорам</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6 col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Контакты</h5><p class="card-text">Просматривайте и управляйте контрактами</p>
+                    <div class="text-center">
+                        <a href="{% url 'contact:contact_list' %}" class="btn btn-primary d-flex align-items-end">Перейти к Контактам</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Задания</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Заголовок</th>
+                                <th>Статус</th>
+                                <th>Выполнить до</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for task in user_tasks %}
+                            <tr>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.get_status_display }}</td>
+                                <td>{{ task.due_date }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">Задания не найдены.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                   <a href="{% url 'tasks:task_create' %}" class="btn btn-primary">Добавить</a>
+                   <a href="{% url 'tasks:task_list' %}" class="btn btn-primary">Просмотреть все</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+{% endblock %}

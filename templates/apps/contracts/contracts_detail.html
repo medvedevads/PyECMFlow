@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">{{ contracts.name }} от {{ contracts.date }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Контрагент:</strong> {% if contracts.business_partner and contracts.business_partner.pk %}
+                <a href="{% url 'business_partner:businesspartner_detail' contracts.business_partner.pk %}">{{ contracts.business_partner.name }} - {{ contracts.business_partner.get_full_address }}</a>
+                {% else %}
+                Отсутсвует
+                {% endif %}
+            <p><strong>Регистрационный номер:</strong> {{ contracts.reg_number }}</p>
+            <p><strong>Категория:</strong> {{ contracts.category }}</p>
+            <p><strong>Содержание:</strong> {{ contracts.content }}</p>
+            <p><strong>Страна:</strong> {{ contracts.country }}</p>
+            <p><strong>Валюта контракта:</strong> {{ contracts.contract_currency }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Статус:</strong> {{ contracts.validity }}</p>
+            <p><strong>Дата окончания действия:</strong> {{ contracts.due_to }}</p>
+            <p><strong>Дата создания:</strong> {{ contracts.created_at }}</p>
+            <p><strong>Дата обновления:</strong> {{ contracts.updated_at }}</p>
+            <p><strong>Пользователь:</strong> {{ contracts.user.username }}</p>
+            <p ><strong>Договор:</strong>
+                {% if contracts.contract_file %}
+                <a href="{{ contracts.contract_file.url }}" target="_blank">{{ contracts.contract_file }} </a>
+                {% else %}
+            <p>Отсутствует</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-end">
+            <a href="{% url 'contracts:contracts_update' contracts.pk %}" class="btn btn-primary me-2">Редактировать</a>
+            <a href="{% url 'contracts:contracts_delete' contracts.pk %}" class="btn btn-danger">Удалить</a>
+        </div>
+     </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container my-5">
+    <div class="row mb-3">
+        <div class="col-12">
+            <h1>Деловые партнеры</h1>
+       </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="d-flex justify-content-between mb-3">
+
+                    {% if show_all %}
+                    <a href="?show_all=false" class="btn btn-facebook">Показывать только моих деловых партнеров</a>
+                    {% else %}
+                    <a href="?show_all=true" class="btn btn-vimeo">Показывать всех деловых партнеров</a>
+                    {% endif %}
+
+                    <a href="{% url 'business_partner:businesspartner_create' %}" class="btn btn-success" >
+                        <i class="bi bi-plus-circle-dotted"></i> Создать Делового партнера
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <table class="table card-table table-vcenter">
+                    <thead>
+                    <tr>
+                        <th>Наименование</th>
+                        <th>Основная роль</th>
+                        <th>Дополнительная роль</th>
+                        <th>Статус</th>
+                        <th>Создан</th>
+                        <th>Пользователь</th>
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for businesspartner in page_obj %}
+                    <tr>
+                        <td><a href="{% url 'business_partner:businesspartner_detail' businesspartner.id %}">{{ businesspartner.name }}</a></td>
+
+                        <td>{{ businesspartner.primary_role }}</td>
+                        <td>{{ businesspartner.secondary_role }}</td>
+                        <td>{{ businesspartner.status }}</td>
+                        <td>{{ businesspartner.created_at }}</td>
+                        <td>{{ businesspartner.user.username }}</td>
+                        <td>
+                            <a href="{% url 'business_partner:businesspartner_update' businesspartner.id %}" class="btn btn-primary btn-sm">Редактировать</a>
+                            <a href="{% url 'business_partner:businesspartner_delete' businesspartner.id %}" class="btn btn-danger btn-sm">Удалить</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">Бизнес-партнеры не найдены.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1&show_all={{ show_all }}" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}&show_all={{ show_all }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}&show_all={{ show_all }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

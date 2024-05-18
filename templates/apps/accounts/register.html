@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Регистрация{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+{% block content %}
+
+<body>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 login-section-wrapper">
+                <div class="login-wrapper my-auto">
+                    <h1 class="login-title">Регистрация в PyECMFlow</h1>
+                    <p class="lead">Зарегистрируйтесь, чтобы получить доступ.</p>
+                    <form method="post" action="{% url 'accounts:register' %}" >
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-block login-btn form-control">Зарегистрироваться</button>
+                    </form>
+                    <p class="login-wrapper-footer-text">Уже есть аккаунт? <a href="{% url 'accounts:login' %}" class="register">Войдите здесь</a></p>
+                </div>
+            </div>
+            <div class="col-sm-6 px-0 d-none d-sm-block">
+                {% load static %}
+                <img src="{% static 'images/second.webp' %}" style="margin-left: -100px;" class="login-img login image">
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+
+</body>
+</html>

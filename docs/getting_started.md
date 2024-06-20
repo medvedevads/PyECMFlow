@@ -29,7 +29,7 @@
    ```
    python manage.py fake_businesspartners(100)
    python manage.py fake_contracts(100)
-   python manage.py fake_contact(100)
+   python manage.py fake_contacts(100)
    python manage.py fake_task(100)
    ```
 6. **Запуск сервера**: запустите сервер разработки, чтобы запустить приложение PyECMFlow на вашем устройстве:
